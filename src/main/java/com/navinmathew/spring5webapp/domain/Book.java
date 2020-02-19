@@ -3,6 +3,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.navinmathew.spring5webapp.domain.Publisher;
+
 @Entity
 public class Book {
 
@@ -12,6 +14,11 @@ public class Book {
 
     private String title;
     private String isbn;
+
+    @ManyToOne
+    private Publisher publisher;
+
+
 
     @ManyToMany()
     @JoinTable(name="author_book", joinColumns = @JoinColumn(name = "book_id"),
@@ -26,6 +33,15 @@ public class Book {
     public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
+    }
+
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public Long getId() {
